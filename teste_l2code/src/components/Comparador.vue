@@ -29,7 +29,6 @@
 </template>
 
 <script>
-//v-model="doge_value" placeholder="Valor em DogeCoin
 export default {
   name: 'Comparador',
   props: {
@@ -48,6 +47,7 @@ export default {
   methods: {
       calcular(){
             
+        this.stores_number = parseInt(this.stores_number)  
         //pegando o valor do campo e atribuindo a uma string
           var position = this.stores_position.toString()
         //usando a função split para separar os valores
@@ -56,24 +56,25 @@ export default {
           
         //transformando o array em um array de inteiros
           let positionsInt = allPosition.map((item)=>{
+
               if(item!=""&&item!=" "&&!item.isNaN){
-                  console.log(item + "passou")
+
                    return parseInt(item)
+
               }else{
-                  //caso ocorra um espaço indesejado no input é retornado 100 para ser tratado a frente
+                  //caso ocorra um espaço indesejado no input é retornado "s" para ser tratado a frente
                   return "s"
               }
              
           })
           
-          //removendo os itens indesejados
+          //removendo os itens indesejados caso ocorram
           positionsInt.forEach((item, indice, array) => {
               if(item=="s"){
                   array.splice(indice);
               }
               
           })
-
         
 
         //colcando os números em ordem crescente
@@ -83,30 +84,48 @@ export default {
         //atribuindo o resultado
             let result = 0
             positionsInt.forEach((item, indice, array) => {
-                
+
                 if(indice!=0){
-            
                 result = result + (item - array[indice-1])                  
                 }
+
             })
 
         //tratando os erros 
+
+                 
           if(this.stores_number!=positionsInt.length){
+
               this.alert_value = true
               this.msg_alert = "O numero de lojas e de posições não correspondem"
               console.log(positionsInt)
-            }else{
+
+          }else{
+
               this.alert_value =false
+
           }
           if(this.stores_number>20){
+
               this.alert_value = true
               this.msg_alert = "Numero de lojas inválido"
+
           }
+          if(this.stores_number.isNaN){
+
+              this.alert_value = true
+              this.msg_alert = "campos vazios ou caracteres inválidos"
+              
+          } 
           
           if(!this.alert_value){
+
                this.resutado_value = result*2
+
           }else{
+
               this.resutado_value= "ocorreu um erro"
+
           }
             
             
@@ -135,15 +154,19 @@ export default {
         margin: 5px;
    }
     .input button {
+        color:white;
         width: min-content;
         font-size: 1.5rem;
-        background-color: rgb(84, 235, 97);
+        background-color: rgb(65, 214, 78);
         border: none;
         align-self: center;
         padding: 5px;
         border-radius: 5px;
         cursor: pointer;
 
+    }
+    .input button:hover{
+        background-color: rgb(104, 231, 115);
     }
     .input label{
         font-size: 1.3rem;
