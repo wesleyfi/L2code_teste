@@ -141,7 +141,7 @@ export default {
         background-color: rgb(206, 206, 206);
         padding: 2px 15px 5px 15px;      
         border-radius: 15px;
-        width: max-content;  
+        width: auto;  
     }
     *{
     }
