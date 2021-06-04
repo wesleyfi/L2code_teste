@@ -1,5 +1,5 @@
 <template>  
-        <div>
+        <div id="conversor">
             <p class="aviso" v-show="alert_value">{{msg_alert}}</p>
             <div id="raiz">
                 <h1>Comparador de distância de lojas</h1>
@@ -95,10 +95,17 @@ export default {
 
                  
           if(this.stores_number!=positionsInt.length){
+              if(positionsInt.length==0){
+                this.alert_value = true
+                this.msg_alert = "Campos vazios ou há um espaço no inicio do campo posições, esse erro o programador não resolveu ;-;"
+                  
+              }else{
+                this.alert_value = true
+                this.msg_alert = "O numero de lojas e de posições não correspondem"
+                console.log(positionsInt)
 
-              this.alert_value = true
-              this.msg_alert = "O numero de lojas e de posições não correspondem"
-              console.log(positionsInt)
+              }
+              
 
           }else{
 
@@ -127,6 +134,7 @@ export default {
               this.resutado_value= "ocorreu um erro"
 
           }
+          
             
             
         }
@@ -137,6 +145,10 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
+    #conversor{
+        display: flex;
+        flex-direction: column;
+    }
     #raiz{
         background-color: rgb(206, 206, 206);
         padding: 2px 15px 5px 15px;      
@@ -180,6 +192,8 @@ export default {
         color: rgb(255, 255, 255);
         font-size: 1.3rem;
         text-align: center;
+        max-width: 300px;
+        align-self: center;
         background-color: tomato;
         padding: 10px;
         
